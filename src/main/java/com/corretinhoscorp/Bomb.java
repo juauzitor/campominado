@@ -29,7 +29,7 @@ public class Bomb {
         return nearbybombs;
     }
 
-    public void setNearbyBombs() {
+    public void setNearbyBombs(int nearbybombs) {
         this.nearbybombs = nearbybombs;
     }
 }
