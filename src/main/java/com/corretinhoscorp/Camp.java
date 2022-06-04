@@ -3,16 +3,16 @@ package com.corretinhoscorp;
 import java.util.Random;
 
 public class Camp {
-    Bomb bombs[][];
+    TitleButton bombs[][];
     Random r = new Random();
     public Camp(int x, int y){
-        bombs = new Bomb[x][y];
+        bombs = new TitleButton[x][y];
     }
 
     public void populateArray() {
         for (int i = 0; i < bombs.length; i++) {
             for (int j = 0; j < bombs.length; j++) {
-                bombs[i][j] = new Bomb(r.nextBoolean());
+                bombs[i][j] = new TitleButton(r.nextBoolean());
             }
         }
     }

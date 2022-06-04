@@ -1,16 +1,21 @@
 package com.corretinhoscorp;
 
-public class Bomb {
+import javafx.scene.control.Button;
+
+public class TitleButton extends Button {
     private boolean bomb;
     private boolean clicked;
     private int nearbybombs;
 
-    public Bomb(boolean bomb){
+    public TitleButton(boolean bomb){
         this.bomb = bomb;
+        this.setText("");
+        this.setMinWidth(50);
+        this.setMinHeight(50);
     }
 
-    public boolean isBomb() {
-        return bomb;        
+    public boolean isBomb(){
+        return bomb;
     }
 
     public boolean isClicked() {
