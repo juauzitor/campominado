@@ -2,13 +2,14 @@ package com.corretinhoscorp;
 
 import javafx.scene.control.Button;
 
-public class TitleButton extends Button {
+public class GroundButton extends Button {
     private boolean bomb;
     private boolean clicked;
     private int nearbybombs;
 
-    public TitleButton(boolean bomb){
+    public GroundButton(boolean bomb){
         this.bomb = bomb;
+        this.clicked = false;
         this.setText("");
         this.setMinWidth(50);
         this.setMinHeight(50);
@@ -37,4 +38,6 @@ public class TitleButton extends Button {
     public void setNearbyBombs(int nearbybombs) {
         this.nearbybombs = nearbybombs;
     }
+
+    
 }

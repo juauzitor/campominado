@@ -28,52 +28,21 @@ public class Gridpanetest extends Application{
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("GridPane Experiment");
         endscene2 = new Scene(loadFXML("endscreen"), 200, 200);
-        TitleButton buttons[][] = new TitleButton[matx][matx];
+        GroundButton buttons[][] = new GroundButton[matx][matx];
         GridPane gridPane = new GridPane();
 
         for (int i = 0; i < matx; i++) { // O gridPane adiciona automaticamente novas linhas e colunas então um for reolve o problema da matriz
             for (int j = 0; j < matx; j++) {
                 //System.out.println(quantmaxbomba);
                 if( quantmaxbomba > 0){ 
-                    buttons[i][j] = new TitleButton(r.nextBoolean());
+                    buttons[i][j] = new GroundButton(r.nextBoolean());
                     if (buttons[i][j].isBomb()) {
                         quantmaxbomba--;
                     }
                 }
                 else{
-                    buttons[i][j] = new TitleButton(false);
+                    buttons[i][j] = new GroundButton(false);
                 }
-            }
-        }
-
-        for (int i = 0; i < buttons.length; i++) {
-            for (int j = 0; j < buttons[i].length; j++) {
-                int cont = 0;
-                if (i > 0 && buttons[i-1][j].isBomb() == true) {
-                    cont++;
-                }
-                if(i < buttons.length-1 && buttons[i+1][j].isBomb() == true){
-                    cont++;
-                }
-                if(j > 0 && buttons[i][j-1].isBomb() == true){
-                    cont++;
-                }
-                if(j < buttons[i].length-1 && buttons[i][j+1].isBomb() == true){
-                    cont++;
-                }
-                if(i > 0 && j > 0 && buttons[i-1][j-1].isBomb() == true){
-                    cont++;
-                }
-                if(i > 0 && j < buttons[i].length-1 && buttons[i-1][j+1].isBomb() == true){
-                    cont++;
-                }
-                if(i < buttons.length-1 && j > 0 && buttons[i+1][j-1].isBomb() == true){
-                    cont++;
-                }
-                if(i < buttons.length-1 && j < buttons[i].length-1 && buttons[i+1][j+1].isBomb() == true){
-                    cont++;
-                }
-                buttons[i][j].setNearbyBombs(cont);
             }
         }
 
@@ -81,17 +50,23 @@ public class Gridpanetest extends Application{
             for (int j = 0; j < matx; j++) {
                 int b = cont;
                 int c = i, d = j;
+                calcNearBombs(buttons, c, j);
                 buttons[i][j].setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
+
                         System.out.println("n = " + b);
                         System.out.println(buttons[c][d].getNearbyBombs());
+
                         if(buttons[c][d].isBomb() == true){
                             buttons[c][d].setText("B");
-                            //System.out.println("Tem: "+ ++contbombs);
+                            System.out.println("Tem: "+ ++contbombs);
                             //Stage stage = (Stage) buttons[c][d].getScene().getWindow();
                             //stage.setScene(Gridpanetest.getScene1());
                         }
-                        else{buttons[c][d].setText(Integer.toString(buttons[c][d].getNearbyBombs()));}
+                        else{
+                            buttons[c][d].setText(Integer.toString(buttons[c][d].getNearbyBombs()));
+                            seekSafeGround(buttons, c, d);
+                        }
                     }                
                 });
                 cont++;
@@ -119,6 +94,41 @@ public class Gridpanetest extends Application{
         return endscene2;
     }
 
+    public void calcNearBombs(GroundButton buttons[][], int c, int r) {
+    	int cont = 0;
+    	for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                try {
+                	if(buttons[c+i][r+j].isBomb()) {
+                		cont++;
+                	}         
+                } catch(Exception e) {
+                	
+                }
+            }
+        }
+    	buttons[c][r].setNearbyBombs(cont);
+    }
+
+    
+    public void seekSafeGround(GroundButton buttons[][], int c, int r){
+        System.out.println("rodando");
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                try {
+                    if(buttons[c+i][r+j].getNearbyBombs() == 0 && !(buttons[c+i][r+j].isClicked())){
+                        buttons[c+i][r+j].setClicked();
+                        buttons[c+i][r+j].setText("0");
+                        seekSafeGround(buttons, c+i, r+j);
+                    }
+                } catch (Exception e) {
+                        
+                }        
+            }
+        }        
+        return;
+    }
+        
     public static void main(String[] args) {
         Application.launch(args);
     }
