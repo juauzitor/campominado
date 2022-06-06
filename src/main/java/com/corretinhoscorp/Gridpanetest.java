@@ -3,14 +3,14 @@ package com.corretinhoscorp;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets; 
-import javafx.geometry.Pos;
+//import javafx.geometry.Insets; 
+//import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene; 
-import javafx.scene.control.Button; 
+//import javafx.scene.control.Button; 
 import javafx.scene.layout.GridPane; 
-import javafx.scene.text.Text; 
-import javafx.scene.control.TextField; 
+//import javafx.scene.text.Text; 
+//import javafx.scene.control.TextField; 
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
@@ -98,13 +98,11 @@ public class Gridpanetest extends Application{
     	int cont = 0;
     	for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                try {
+                if (((c+i) >= 0 && (c+i) < buttons.length) && ((r+j) >= 0 && (r+j) < buttons[c].length)){
                 	if(buttons[c+i][r+j].isBomb()) {
                 		cont++;
-                	}         
-                } catch(Exception e) {
-                	
-                }
+                	}
+                }         
             }
         }
     	buttons[c][r].setNearbyBombs(cont);
@@ -115,20 +113,18 @@ public class Gridpanetest extends Application{
         System.out.println("rodando");
         for (int i = -1; i < 2; i++) {
             for (int j = -1; j < 2; j++) {
-                try {
+                if(((c+i) >= 0 && (c+i) < buttons.length) && ((r+j) >= 0 && (r+j) < buttons[c].length)){
                     if(buttons[c+i][r+j].getNearbyBombs() == 0 && !(buttons[c+i][r+j].isClicked())){
                         buttons[c+i][r+j].setClicked();
                         buttons[c+i][r+j].setText("0");
                         seekSafeGround(buttons, c+i, r+j);
                     }
-                } catch (Exception e) {
-                        
                 }        
             }
-        }        
+        }
         return;
     }
-        
+      
     public static void main(String[] args) {
         Application.launch(args);
     }
