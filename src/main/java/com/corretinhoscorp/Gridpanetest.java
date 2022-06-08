@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Gridpanetest extends Application{
-    //private static Scene endscene2;
+    private static Scene endscene2;
     private static Scene victory;
     private int cont, contbombs;
     int matx=10;
@@ -29,7 +29,7 @@ public class Gridpanetest extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("GridPane Experiment");
-        //endscene2 = new Scene(loadFXML("endscreen"), 200, 200);
+        endscene2 = new Scene(loadFXML("endscreen"), 200, 200);
         victory = new Scene(loadFXML("victory"), 200, 200);
         GroundButton buttons[][] = new GroundButton[matx][matx];
         GridPane gridPane = new GridPane();
@@ -52,8 +52,8 @@ public class Gridpanetest extends Application{
                         if(buttons[c][d].isBomb() == true){
                             buttons[c][d].setText("B");
                             System.out.println("Tem: "+ ++contbombs);
-                            //Stage stage = (Stage) buttons[c][d].getScene().getWindow();
-                            //stage.setScene(Gridpanetest.getScene1());
+                            Stage stage = (Stage) buttons[c][d].getScene().getWindow();
+                            stage.setScene(Gridpanetest.getScene1());
                         }
                         else{
                             buttons[c][d].setText(Integer.toString(buttons[c][d].getNearbyBombs()));
@@ -85,10 +85,10 @@ public class Gridpanetest extends Application{
         FXMLLoader fxmlLoader = new FXMLLoader(Gridpanetest.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
-/*
+
     static Scene getScene1(){
         return endscene2;
-    }*/
+    }
     static Scene getScene2(){
         return victory;
     }
