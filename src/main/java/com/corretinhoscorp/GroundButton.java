@@ -7,8 +7,8 @@ public class GroundButton extends Button {
     private boolean clicked;
     private int nearbybombs;
 
-    public GroundButton(boolean bomb){
-        this.bomb = bomb;
+    public GroundButton(){
+        this.bomb = false;
         this.clicked = false;
         this.setText("");
         this.setMinWidth(50);
@@ -17,6 +17,14 @@ public class GroundButton extends Button {
 
     public boolean isBomb(){
         return bomb;
+    }
+
+    public void setBomb() {
+        if (bomb == false) {
+            this.bomb = true;
+        } else {
+            this.bomb = false;
+        }
     }
 
     public boolean isClicked() {

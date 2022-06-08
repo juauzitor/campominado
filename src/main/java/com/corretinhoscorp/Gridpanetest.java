@@ -36,17 +36,11 @@ public class Gridpanetest extends Application{
 
         for (int i = 0; i < matx; i++) { // O gridPane adiciona automaticamente novas linhas e colunas então um for reolve o problema da matriz
             for (int j = 0; j < matx; j++) {
-                if( quantmaxbomba > 0){ 
-                    buttons[i][j] = new GroundButton(r.nextBoolean());
-                    if (buttons[i][j].isBomb()) {
-                        quantmaxbomba--;
-                    }
-                }
-                else{
-                    buttons[i][j] = new GroundButton(false);
-                }
+                buttons[i][j] = new GroundButton();
             }
         }
+
+        generateBombs(buttons, quantmaxbomba, r, matx);
 
         for (int i = 0; i < matx; i++) { // O gridPane adiciona automaticamente novas linhas e colunas então um for reolve o problema da matriz
             for (int j = 0; j < matx; j++) {
@@ -76,7 +70,6 @@ public class Gridpanetest extends Application{
             }
         }
 
-
         for (int i = 0; i < matx; i++) { // O gridPane adiciona automaticamente novas linhas e colunas então um for reolve o problema da matriz
             for (int j = 0; j < matx; j++) {
                 gridPane.add(buttons[i][j], i, j);
@@ -98,6 +91,18 @@ public class Gridpanetest extends Application{
     }*/
     static Scene getScene2(){
         return victory;
+    }
+
+    static void generateBombs(GroundButton buttons[][], int quantmaxbomba, Random r, int tam){
+        while (quantmaxbomba > 0) {
+            int col, row;
+            col = r.nextInt(tam);
+            row = r.nextInt(tam);
+            if (buttons[col][row].isBomb() == false) {
+                buttons[col][row].setBomb();
+                quantmaxbomba--;    
+            }    
+        }
     }
 
     public void calcNearBombs(GroundButton buttons[][], int c, int r) {
