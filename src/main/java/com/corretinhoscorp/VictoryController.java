@@ -10,8 +10,8 @@ public class VictoryController {
     @FXML
     private void victoryButtonAction() {
         // get a handle to the stage
-        Stage stage = (Stage) victoryButton.getScene().getWindow();
+        Stage stage = (Stage) victoryButton.getScene().getWindow(); //Instanciar a janela que o progama esta
         // do what you have to do
-        stage.close();
+        stage.close(); // Fechar a janela
     }    
 }

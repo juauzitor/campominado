@@ -2,8 +2,8 @@ package com.corretinhoscorp;
 
 import javafx.scene.control.Button;
 
-public class GroundButton extends Button {
-    private boolean bomb;
+public class GroundButton extends Button { 
+    private boolean bomb; 
     private boolean clicked;
     private int nearbybombs;
 
@@ -15,11 +15,11 @@ public class GroundButton extends Button {
         this.setMinHeight(50);
     }
 
-    public boolean isBomb(){
+    public boolean isBomb(){ // função que retorna se é bomba ou não 
         return bomb;
     }
 
-    public void setBomb() {
+    public void setBomb() { // função que seta  bomba
         if (bomb == false) {
             this.bomb = true;
         } else {
@@ -27,11 +27,11 @@ public class GroundButton extends Button {
         }
     }
 
-    public boolean isClicked() {
+    public boolean isClicked() { //função de evento de clique
         return clicked;
-    }
+    } 
 
-    public void setClicked() {
+    public void setClicked() { //função que alterna o evento de não clicado para clicado
         if (clicked == false) {
             this.clicked = true;
         } else {
@@ -39,11 +39,11 @@ public class GroundButton extends Button {
         }
     }
 
-    public int getNearbyBombs() {
+    public int getNearbyBombs() { // função que retorna o numero inteiro de bombas ao redor
         return nearbybombs;
     }
 
-    public void setNearbyBombs(int nearbybombs) {
+    public void setNearbyBombs(int nearbybombs) { // seta o numero inteiro de bombas ao redor
         this.nearbybombs = nearbybombs;
     }
 
